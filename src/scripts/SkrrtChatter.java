@@ -20,6 +20,7 @@ import scripts.skrrt_api.task.TaskSet;
 import scripts.skrrt_api.util.functions.Logging;
 import scripts.skrrt_api.util.functions.Sleep;
 import scripts.skrrt_api.util.functions.Traversing;
+import scripts.skrrt_api.util.numbers.Randomisation;
 import scripts.skrrt_api.util.numbers.Reactions;
 import scripts.skrrt_api.util.numbers.SeedGenerator;
 import scripts.tasks.Chatter;
@@ -45,16 +46,7 @@ public class SkrrtChatter extends Script implements Starting, PaintInfo, Paintin
             Logging.message("SkrrtChatter","Dialogue: " + Vars.dialogue.toString(),"Dialogue size: " + (Vars.dialogue.size()));
         }
         Sleep.until(()->!Login.getLoginState().equals(Login.STATE.LOGINSCREEN));
-        SeedGenerator seed = new SeedGenerator();
-        while (seed.getPlayerSeed() == 0) {
-            seed.generateRandom();
-            Vars.playerSeed = seed.getPlayerSeed();
-            if ((int) Vars.playerSeed * 100 > 200) {
-                Mouse.setSpeed(General.random(130, 200));
-            } else {
-                Mouse.setSpeed((int) (Vars.playerSeed * 100));
-            }
-        }
+        Randomisation.setMouseSpeed();
 
         TaskSet tasks = new TaskSet(new Chatter());
 
