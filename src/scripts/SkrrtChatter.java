@@ -14,6 +14,7 @@ import org.tribot.script.interfaces.Painting;
 import org.tribot.script.interfaces.Starting;
 import scripts.data.*;
 
+import scripts.skrrt_api.data_tracker.DataTracker;
 import scripts.skrrt_api.events.Core;
 import scripts.skrrt_api.task.Task;
 import scripts.skrrt_api.task.TaskSet;
@@ -37,6 +38,7 @@ public class SkrrtChatter extends Script implements Starting, PaintInfo, Paintin
 
     private final FluffeesPaint SkrrtPaint = new FluffeesPaint(this, FluffeesPaint.PaintLocations.BOTTOM_LEFT_PLAY_SCREEN, new Color[]{new Color(255, 251, 255)}, "Trebuchet MS", new Color[]{new Color(0, 0, 0, 124)},
             new Color[]{new Color(179, 0, 0)}, 1, false, 5, 3, 0);
+    DataTracker tracker = new DataTracker("https://api.skrrtscripts.com", "secret", "chatter");
 
 
     @Override
@@ -55,6 +57,9 @@ public class SkrrtChatter extends Script implements Starting, PaintInfo, Paintin
             if (task != null) {
                 Vars.status = task.toString();
                 task.execute();
+                tracker.start();
+                tracker.trackNumber("runtime",getRunningTime());
+                tracker.trackNumber("interactions",1);
             }
             General.sleep(600);
         }
@@ -70,7 +75,7 @@ public class SkrrtChatter extends Script implements Starting, PaintInfo, Paintin
 
     @Override
     public String[] getPaintInfo() {
-        return new String[]{"SkrrtChatter V0.8", "Time ran: " + SkrrtPaint.getRuntimeString(), "Status: " + Core.getStatus()};
+        return new String[]{"SkrrtChatter V0.9", "Time ran: " + SkrrtPaint.getRuntimeString(), "Status: " + Core.getStatus()};
     }
 
 
