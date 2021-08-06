@@ -50,7 +50,11 @@ public class Chatter implements Task {
             if (DaxPathFinder.canReach(npc.getPosition())) {
                 if (Interaction.clickNPC(Vars.npcName, Vars.action)) {
                     Vars.hasClicked = true;
-                    General.sleep(Reactions.getNormal());
+                    if(!Vars.dialogue.isEmpty()){
+                        Sleep.until(NPCInteraction::isConversationWindowUp,Reactions.getNormal()*Player07.distanceTo(npc.getPosition()));
+                    } else {
+                        General.sleep(Reactions.getNormal());
+                    }
                 }
             } else {
                 Traversing.walkTo(npc.getPosition());
