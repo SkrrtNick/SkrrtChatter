@@ -75,7 +75,7 @@ public class SkrrtChatter extends Script implements Starting, PaintInfo, Paintin
 
     @Override
     public String[] getPaintInfo() {
-        return new String[]{"SkrrtChatter V0.9", "Time ran: " + SkrrtPaint.getRuntimeString(), "Status: " + Core.getStatus()};
+        return new String[]{"SkrrtChatter V0.91", "Time ran: " + SkrrtPaint.getRuntimeString(), "Status: " + Core.getStatus()};
     }
 
 
