@@ -1,5 +1,6 @@
 package scripts.tasks;
 
+import dax.walker.utils.path.DaxPathFinder;
 import dax.walker_engine.interaction_handling.NPCInteraction;
 import org.tribot.api.General;
 import org.tribot.api2007.Game;
@@ -7,7 +8,7 @@ import org.tribot.api2007.Interfaces;
 import org.tribot.api2007.Login;
 import org.tribot.api2007.types.RSNPC;
 import org.tribot.api2007.types.RSTile;
-import scripts.data.*;
+import scripts.data.Vars;
 import scripts.skrrt_api.events.Core;
 import scripts.skrrt_api.task.Priority;
 import scripts.skrrt_api.task.Task;
@@ -36,7 +37,7 @@ public class Chatter implements Task {
         General.sleep(Reactions.getNormal());
         RSNPC npc = Interaction.getNPC(Vars.npcName);
         RSTile customLocation = new RSTile(Vars.x, Vars.y, Vars.z);
-        if (Game.getGameState() == 30 && (npc == null || !Interaction.npcExists(Vars.npcName) || !npc.isClickable())) {
+        if (Game.getGameState() == 30 && (npc == null || !npc.isClickable())) {
             if (Traversing.walkTo(customLocation)) {
                 Core.setStatus("Traversing to " + Vars.npcName);
             }
@@ -45,32 +46,37 @@ public class Chatter implements Task {
                 Vars.isRunning = false;
             }
         }
-        if (Interaction.npcExists(Vars.npcName)) {
-            if(Interaction.clickNPC(Vars.npcName, Vars.action)){
-                Vars.hasClicked = true;
-                General.sleep(Reactions.getNormal());
-            }
-        }
-        if (!Vars.dialogue.isEmpty() && Player07.distanceTo(customLocation) < 5) {
-            if (!NPCInteraction.isConversationWindowUp()) {
+        if(npc!=null){
+            if (DaxPathFinder.canReach(npc.getPosition())) {
                 if (Interaction.clickNPC(Vars.npcName, Vars.action)) {
                     Vars.hasClicked = true;
-                    Sleep.until(NPCInteraction::isConversationWindowUp, 2000);
+                    General.sleep(Reactions.getNormal());
                 }
+            } else {
+                Traversing.walkTo(npc.getPosition());
             }
-            Core.setStatus("Handling dialogue");
-            if (NPCInteraction.isConversationWindowUp()) {
-                NPCInteraction.handleConversation(Vars.dialogue.toArray(new String[Vars.dialogue.size()]));
+            if (!Vars.dialogue.isEmpty() && Player07.distanceTo(customLocation) < 5) {
+                if (!NPCInteraction.isConversationWindowUp()) {
+                    if (Interaction.clickNPC(Vars.npcName, Vars.action)) {
+                        Vars.hasClicked = true;
+                        Sleep.until(NPCInteraction::isConversationWindowUp, 2000);
+                    }
+                }
+                Core.setStatus("Handling dialogue");
+                if (NPCInteraction.isConversationWindowUp()) {
+                    NPCInteraction.handleConversation(Vars.dialogue.toArray(new String[Vars.dialogue.size()]));
+                    Sleep.until(() -> !NPCInteraction.isConversationWindowUp());
+                }
+                NPCInteraction.handleConversation();
+                Interaction.handleContinue();
                 Sleep.until(() -> !NPCInteraction.isConversationWindowUp());
+                Interfaces.closeAll();
             }
-            NPCInteraction.handleConversation();
-            Interaction.handleContinue();
-            Sleep.until(() -> !NPCInteraction.isConversationWindowUp());
-            Interfaces.closeAll();
-        }
-        if(Vars.hasClicked && !NPCInteraction.isConversationWindowUp()){
-            Logging.message("[SkrrtChatter]", " Completed the task, thanks for using Skrrt Chatter");
-            Vars.isRunning = false;
+            if (Vars.hasClicked && !NPCInteraction.isConversationWindowUp()) {
+                Logging.message("[SkrrtChatter]", " Completed the task, thanks for using Skrrt Chatter");
+                Vars.isRunning = false;
+            }
+
         }
 
     }
