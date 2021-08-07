@@ -19,7 +19,7 @@ public class Chatter implements Task {
 
     @Override
     public String toString() {
-        return Core.getStatus();
+        return "Using " + Vars.action + " on " + Vars.npcName;
     }
 
     @Override

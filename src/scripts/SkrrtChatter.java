@@ -55,7 +55,7 @@ public class SkrrtChatter extends Script implements Starting, PaintInfo, Paintin
         while (Vars.isRunning) {
             Task task = tasks.getValidTask();
             if (task != null) {
-                Vars.status = task.toString();
+                Core.setStatus(task.toString());
                 task.execute();
                 tracker.start();
                 tracker.trackNumber("runtime",getRunningTime());
