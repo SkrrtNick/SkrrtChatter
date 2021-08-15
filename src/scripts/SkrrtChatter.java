@@ -10,6 +10,7 @@ import org.tribot.api2007.Login;
 import org.tribot.script.Script;
 import org.tribot.script.ScriptManifest;
 import org.tribot.script.interfaces.Arguments;
+import org.tribot.script.interfaces.Ending;
 import org.tribot.script.interfaces.Painting;
 import org.tribot.script.interfaces.Starting;
 import scripts.data.*;
@@ -31,7 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 
-public class SkrrtChatter extends Script implements Starting, PaintInfo, Painting, Arguments {
+public class SkrrtChatter extends Script implements Starting, PaintInfo, Painting, Arguments, Ending {
 
 
     @ScriptManifest(name = "SkrrtChatter", authors = {"SkrrtNick"}, category = "Tools")
@@ -63,7 +64,6 @@ public class SkrrtChatter extends Script implements Starting, PaintInfo, Paintin
             }
             General.sleep(600);
         }
-
     }
 
     @Override
@@ -108,5 +108,10 @@ public class SkrrtChatter extends Script implements Starting, PaintInfo, Paintin
                 }
             } Vars.isRunning = true;
         }
+    }
+
+    @Override
+    public void onEnd() {
+        tracker.stop();
     }
 }
