@@ -9,11 +9,11 @@ import org.tribot.api2007.Login;
 import org.tribot.api2007.types.RSNPC;
 import org.tribot.api2007.types.RSTile;
 import scripts.data.Vars;
-import scripts.skrrt_api.events.Core;
-import scripts.skrrt_api.task.Priority;
-import scripts.skrrt_api.task.Task;
-import scripts.skrrt_api.util.functions.*;
-import scripts.skrrt_api.util.numbers.Reactions;
+import scripts.api.Core;
+import scripts.api.task.Priority;
+import scripts.api.task.Task;
+import scripts.api.util.functions.*;
+import scripts.api.util.numbers.Reactions;
 
 public class Chatter implements Task {
 

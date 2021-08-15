@@ -15,16 +15,16 @@ import org.tribot.script.interfaces.Painting;
 import org.tribot.script.interfaces.Starting;
 import scripts.data.*;
 
-import scripts.skrrt_api.data_tracker.DataTracker;
-import scripts.skrrt_api.events.Core;
-import scripts.skrrt_api.task.Task;
-import scripts.skrrt_api.task.TaskSet;
-import scripts.skrrt_api.util.functions.Logging;
-import scripts.skrrt_api.util.functions.Sleep;
-import scripts.skrrt_api.util.functions.Traversing;
-import scripts.skrrt_api.util.numbers.Randomisation;
-import scripts.skrrt_api.util.numbers.Reactions;
-import scripts.skrrt_api.util.numbers.SeedGenerator;
+import scripts.api.data_tracker.DataTracker;
+import scripts.api.Core;
+import scripts.api.task.Task;
+import scripts.api.task.TaskSet;
+import scripts.api.util.functions.Logging;
+import scripts.api.util.functions.Sleep;
+import scripts.api.util.functions.Traversing;
+import scripts.api.util.numbers.Randomisation;
+import scripts.api.util.numbers.Reactions;
+import scripts.api.util.numbers.SeedGenerator;
 import scripts.tasks.Chatter;
 
 import java.awt.*;
