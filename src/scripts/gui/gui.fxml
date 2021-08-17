@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="ownerWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scripts.gui.Controller">
+   <children>
+      <TextField fx:id="zCoordinate" layoutX="174.0" layoutY="118.0" prefHeight="25.0" prefWidth="40.0" />
+      <TextField fx:id="yCoordinate" layoutX="174.0" layoutY="81.0" prefHeight="25.0" prefWidth="40.0" />
+      <TextField layoutX="174.0" layoutY="43.0" prefHeight="25.0" prefWidth="40.0" fx:id="xCoordinate" />
+      <TextField fx:id="npcName" layoutX="122.0" layoutY="159.0" prefHeight="25.0" prefWidth="92.0" />
+      <Label layoutX="134.0" layoutY="47.0" text="X" />
+      <Label layoutX="134.0" layoutY="85.0" text="Y" />
+      <Label layoutX="134.0" layoutY="122.0" text="Z" />
+      <Label layoutX="32.0" layoutY="163.0" text="NPC Name" />
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="353.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="save" disable="true" mnemonicParsing="false" onAction="#saveClicked" text="Save" />
+                  <MenuItem fx:id="saveAs" mnemonicParsing="false" onAction="#saveAsClicked" text="Save as" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="load" mnemonicParsing="false" onAction="#loadClicked" text="Load" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <CheckMenuItem fx:id="darkMode" mnemonicParsing="false" onAction="#checkDarkMode" text="Dark Mode" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitClicked" text="Exit" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <ImageView fitHeight="70.0" fitWidth="78.0" layoutX="32.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="https://i.imgur.com/jvH8KZq.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="startBtn" layoutX="280.0" layoutY="277.0" mnemonicParsing="false" onAction="#startScriptPressed" prefHeight="25.0" prefWidth="59.0" text="Start" />
+      <Button fx:id="btnAddTask" layoutX="194.0" layoutY="277.0" mnemonicParsing="false" onAction="#startScriptPressed" prefHeight="25.0" prefWidth="68.0" text="Add Task" />
+      <TextField fx:id="dialogue" layoutX="121.0" layoutY="199.0" prefHeight="25.0" prefWidth="92.0" />
+      <Label layoutX="31.0" layoutY="203.0" text="Dialogue" />
+      <TextField fx:id="action" layoutX="121.0" layoutY="243.0" prefHeight="25.0" prefWidth="92.0" />
+      <Label layoutX="31.0" layoutY="247.0" text="Action" />
+      <ListView fx:id="taskList" editable="true" layoutX="228.0" layoutY="43.0" prefHeight="224.0" prefWidth="107.0" />
+   </children>
+</Pane>
